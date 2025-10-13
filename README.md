@@ -2,6 +2,8 @@
 A repo to determine when astronomical events are occurring from the perspective of my location
 
 ## Development
+Follow the instructions to install python, setup your environment, and learn how to save changes using git
+
 ### Development prerequisites
 These are recommended for the smoothest development experience on Mac
 
@@ -51,12 +53,17 @@ pyenv install
 uv sync
 ```
 
+5. Setup VSCode to automatically activate the virtual environment:
+- Open the command palette (`Cmd + Shift + P`)
+- Type `Python: Select Interpreter` and select it
+- Choose the 'Python 3.12.4 (astro-events)' interpreter from the list
+
 ### Adding dependencies
 To add a new dependency, use the following command:
 ```bash
 uv add <package-name>
 ```
-This will add the package to your virtual environment and update the `pyproject.toml` and `uv.lock` files accordingly.
+This will add the package to your virtual environment and update the `pyproject.toml` and `uv.lock` files accordingly. **Make sure to commit these changes**
 
 ### Git Workflow
 - Save all files
