@@ -1,6 +1,8 @@
 import ephem
 import math
 from datetime import datetime, timedelta
+from datetime import UTC
+import zoneinfo
 
 # ---- Inputs ----
 # Observer (Kaysville, UT)
@@ -13,7 +15,7 @@ peak_lat = 41.0328
 peak_lon = -111.8386
 peak_elev = 2866  # meters
 
-tolerance_deg = 0.1  # azimuth/altitude alignment tolerance
+tolerance_deg = 5  # azimuth/altitude alignment tolerance
 
 # ---- Setup observer ----
 obs = ephem.Observer()
@@ -48,9 +50,10 @@ print(f"Azimuth to mountain: {mountain_azimuth:.2f}°")
 print(f"Elevation angle to mountain: {mountain_elev_angle:.2f}°")
 
 # ---- Search for alignment ----
+num_days = 365
 moon = ephem.Moon()
-t = datetime.utcnow()
-end_time = t + timedelta(days=30)
+t = datetime.now(UTC)
+end_time = t + timedelta(days=num_days)
 found = None
 step = timedelta(minutes=1)
 
@@ -67,6 +70,8 @@ while t < end_time:
     t += step
 
 if found:
+    mt = found.astimezone(zoneinfo.ZoneInfo("America/Denver"))
     print(f"Next alignment: {found} UTC")
+    print(f"Next alignment (local): {mt}")
 else:
-    print("No alignment found within 30 days.")
+    print(f"No alignment found within {num_days} days.")
