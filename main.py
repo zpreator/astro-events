@@ -69,9 +69,13 @@ while t < end_time:
         break
     t += step
 
+# ---- Report results ----
 if found:
     mt = found.astimezone(zoneinfo.ZoneInfo("America/Denver"))
-    print(f"Next alignment: {found} UTC")
+    obs.date = found
+    moon.compute(obs)
+    #print(f"\nNext alignment: {found} UTC")
     print(f"Next alignment (local): {mt}")
+    print(f"Moon phase at alignment: {moon.phase:.1f}%")
 else:
     print(f"No alignment found within {num_days} days.")
